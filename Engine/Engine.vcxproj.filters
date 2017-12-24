@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="cameraclass.cpp" />
+    <ClCompile Include="d3dclass.cpp" />
+    <ClCompile Include="depthshaderclass.cpp" />
+    <ClCompile Include="graphicsclass.cpp" />
+    <ClCompile Include="inputclass.cpp" />
+    <ClCompile Include="lightclass.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="modelclass.cpp" />
+    <ClCompile Include="positionclass.cpp" />
+    <ClCompile Include="rendertextureclass.cpp" />
+    <ClCompile Include="shadowshaderclass.cpp" />
+    <ClCompile Include="systemclass.cpp" />
+    <ClCompile Include="textureclass.cpp" />
+    <ClCompile Include="timerclass.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cameraclass.h" />
+    <ClInclude Include="d3dclass.h" />
+    <ClInclude Include="depthshaderclass.h" />
+    <ClInclude Include="graphicsclass.h" />
+    <ClInclude Include="inputclass.h" />
+    <ClInclude Include="lightclass.h" />
+    <ClInclude Include="modelclass.h" />
+    <ClInclude Include="positionclass.h" />
+    <ClInclude Include="rendertextureclass.h" />
+    <ClInclude Include="shadowshaderclass.h" />
+    <ClInclude Include="systemclass.h" />
+    <ClInclude Include="textureclass.h" />
+    <ClInclude Include="timerclass.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="depth.ps" />
+    <None Include="depth.vs" />
+    <None Include="shadow.ps" />
+    <None Include="shadow.vs" />
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>
