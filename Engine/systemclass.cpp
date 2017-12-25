@@ -244,7 +244,22 @@ bool SystemClass::HandleInput(float frameTime)
 	keyDown = m_Input->IsDownPressed();
 	m_Position->MoveBackward(keyDown);
 
+	// WASD MOVE FUNCTIONS
+	keyDown = m_Input->IsWPressed();
+	m_Position->MoveForward(keyDown);
+
+	keyDown = m_Input->IsSPressed();
+	m_Position->MoveBackward(keyDown);
+
 	keyDown = m_Input->IsAPressed();
+	m_Position->MoveLeft(keyDown);
+
+	keyDown = m_Input->IsDPressed();
+	m_Position->MoveRight(keyDown);
+	// WASD MOVE FUNCTIONS
+
+	// Up and down //
+	keyDown = m_Input->IsXPressed();
 	m_Position->MoveUpward(keyDown);
 
 	keyDown = m_Input->IsZPressed();

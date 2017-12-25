@@ -32,6 +32,8 @@ public:
 
 	void MoveForward(bool);
 	void MoveBackward(bool);
+	void MoveLeft(bool keydown);
+	void MoveRight(bool keydown);
 	void MoveUpward(bool);
 	void MoveDownward(bool);
 	void TurnLeft(bool);
@@ -50,7 +52,7 @@ private:
 	float m_leftTurnSpeed, m_rightTurnSpeed;
 	float m_lookUpSpeed, m_lookDownSpeed;
 
-
+	float _moveInc = 0.008f;
 
 	float _fwdSpeed = 0;
 

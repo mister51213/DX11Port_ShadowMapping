@@ -82,45 +82,14 @@ void PositionClass::SetFrameTime(float time)
 
 void PositionClass::MoveForward(bool keydown)
 {
-	//float radians;
-
-	//// Update the forward speed movement based on the frame time and whether the user is holding the key down or not.
-	//if(keydown)
-	//{
-	//	m_forwardSpeed += m_frameTime * 0.001f;
-
-	//	if(m_forwardSpeed > (m_frameTime * 0.03f))
-	//	{
-	//		m_forwardSpeed = m_frameTime * 0.03f;
-	//	}
-	//}
-	//else
-	//{
-	//	m_forwardSpeed -= m_frameTime * 0.0007f;
-
-	//	if(m_forwardSpeed < 0.0f)
-	//	{
-	//		m_forwardSpeed = 0.0f;
-	//	}
-	//}
-
-	//// Convert degrees to radians.
-	//radians = m_rotationY * 0.0174532925f;
-
-	//// Update the position.
-	//m_positionX += sinf(radians) * m_forwardSpeed;
-	//m_positionZ += cosf(radians) * m_forwardSpeed;
-
-	// MOVE FORWARD RELATIVE //
-	// MOVE FORWARD RELATIVE //
 	// MOVE FORWARD RELATIVE //
 	if (keydown)
 	{
-		_fwdSpeed += 0.01f*m_frameTime;
+		_fwdSpeed += _moveInc*m_frameTime;
 	}
 	else
 	{
-		_fwdSpeed -= 0.01f*m_frameTime;
+		_fwdSpeed -= _moveInc*m_frameTime;
 
 		if (_fwdSpeed < 0)
 		{
@@ -155,39 +124,127 @@ void PositionClass::MoveForward(bool keydown)
 
 void PositionClass::MoveBackward(bool keydown)
 {
-	float radians;
-
-
-	// Update the backward speed movement based on the frame time and whether the user is holding the key down or not.
-	if(keydown)
-	{
-		m_backwardSpeed += m_frameTime * 0.001f;
-
-		if(m_backwardSpeed > (m_frameTime * 0.03f))
+		// MOVE FORWARD RELATIVE //
+		if (keydown)
 		{
-			m_backwardSpeed = m_frameTime * 0.03f;
+			_fwdSpeed += _moveInc*m_frameTime;
 		}
+		else
+		{
+			_fwdSpeed -= _moveInc*m_frameTime;
+
+			if (_fwdSpeed < 0)
+			{
+				_fwdSpeed = 0;
+			}
+		}
+
+		// Get move direction
+		XMFLOAT3 fwd(0.f, 0.f, 1.f);
+		XMVECTOR directionRelative = XMLoadFloat3(&fwd);
+		XMVECTOR directionWorld = XMVector3TransformCoord(
+			directionRelative,
+			DirectX::XMMatrixRotationRollPitchYaw(m_rotationZ*0.0174532925f,
+				m_rotationX*0.0174532925f,
+				m_rotationY*0.0174532925f));
+
+		// Multiply to create move increment
+		XMFLOAT3 worldDispFloat3;
+		XMStoreFloat3(&worldDispFloat3, directionWorld);
+		worldDispFloat3.x *= _fwdSpeed;
+		worldDispFloat3.y *= _fwdSpeed;
+		worldDispFloat3.z *= _fwdSpeed;
+
+		// Add increment to position
+		m_positionX -= worldDispFloat3.x;
+		m_positionY -= worldDispFloat3.y;
+		m_positionZ -= worldDispFloat3.z;
+
+		return;
+}
+
+
+void PositionClass::MoveLeft(bool keydown)
+{
+	// MOVE FORWARD RELATIVE //
+	if (keydown)
+	{
+		_fwdSpeed += _moveInc*m_frameTime;
 	}
 	else
 	{
-		m_backwardSpeed -= m_frameTime * 0.0007f;
-		
-		if(m_backwardSpeed < 0.0f)
+		_fwdSpeed -= _moveInc*m_frameTime;
+
+		if (_fwdSpeed < 0)
 		{
-			m_backwardSpeed = 0.0f;
+			_fwdSpeed = 0;
 		}
 	}
 
-	// Convert degrees to radians.
-	radians = m_rotationY * 0.0174532925f;
+	// Get move direction
+	XMFLOAT3 fwd(1.f, 0.f,0.f);
+	XMVECTOR directionRelative = XMLoadFloat3(&fwd);
+	XMVECTOR directionWorld = XMVector3TransformCoord(
+		directionRelative,
+		DirectX::XMMatrixRotationRollPitchYaw(m_rotationZ*0.0174532925f,
+			m_rotationX*0.0174532925f,
+			m_rotationY*0.0174532925f));
 
-	// Update the position.
-	m_positionX -= sinf(radians) * m_backwardSpeed;
-	m_positionZ -= cosf(radians) * m_backwardSpeed;
+	// Multiply to create move increment
+	XMFLOAT3 worldDispFloat3;
+	XMStoreFloat3(&worldDispFloat3, directionWorld);
+	worldDispFloat3.x *= _fwdSpeed;
+	worldDispFloat3.y *= _fwdSpeed;
+	worldDispFloat3.z *= _fwdSpeed;
+
+	// Add increment to position
+	m_positionX -= worldDispFloat3.x;
+	m_positionY -= worldDispFloat3.y;
+	m_positionZ -= worldDispFloat3.z;
 
 	return;
 }
 
+void PositionClass::MoveRight(bool keydown)
+{
+	// MOVE FORWARD RELATIVE //
+	if (keydown)
+	{
+		_fwdSpeed += _moveInc*m_frameTime;
+	}
+	else
+	{
+		_fwdSpeed -= _moveInc*m_frameTime;
+
+		if (_fwdSpeed < 0)
+		{
+			_fwdSpeed = 0;
+		}
+	}
+
+	// Get move direction
+	XMFLOAT3 fwd(1.f, 0.f, 0.f);
+	XMVECTOR directionRelative = XMLoadFloat3(&fwd);
+	XMVECTOR directionWorld = XMVector3TransformCoord(
+		directionRelative,
+		DirectX::XMMatrixRotationRollPitchYaw(m_rotationZ*0.0174532925f,
+			m_rotationX*0.0174532925f,
+			m_rotationY*0.0174532925f));
+
+	// Multiply to create move increment
+	XMFLOAT3 worldDispFloat3;
+	XMStoreFloat3(&worldDispFloat3, directionWorld);
+	worldDispFloat3.x *= _fwdSpeed;
+	worldDispFloat3.y *= _fwdSpeed;
+	worldDispFloat3.z *= _fwdSpeed;
+
+	// Add increment to position
+	m_positionX += worldDispFloat3.x;
+	m_positionY += worldDispFloat3.y;
+	m_positionZ += worldDispFloat3.z;
+
+	return;
+}
 
 void PositionClass::MoveUpward(bool keydown)
 {
