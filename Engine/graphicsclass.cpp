@@ -74,7 +74,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	}
 
 	// Set the position for the cube model.
-	m_CubeModel->SetPosition(-2.0f, 2.0f, 0.0f);
+	m_CubeModel->SetPosition(-2.0f, 1.f, 0.0f);
 
 	// Create the sphere model object.
 	m_SphereModel = new ModelClass;
@@ -92,7 +92,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	}
 
 	// Set the position for the sphere model.
-	m_SphereModel->SetPosition(2.0f, 2.0f, 0.0f);
+	m_SphereModel->SetPosition(2.0f, 1.0f, 0.0f);
 
 	// Create the ground model object.
 	m_GroundModel = new ModelClass;
@@ -110,7 +110,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	}
 
 	// Set the position for the ground model.
-	m_GroundModel->SetPosition(0.0f, 1.0f, 0.0f);
+	m_GroundModel->SetPosition(0.0f, 0.0f, 0.0f);
 
 	// Create the light object.
 	m_Light = new LightClass;
@@ -133,7 +133,9 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	}
 
 	// Initialize the render to texture object.
+	//result = m_RenderTexture->Initialize(m_D3D->GetDevice(), SHADOWMAP_WIDTH, SHADOWMAP_HEIGHT, SCREEN_DEPTH, SCREEN_NEAR);
 	result = m_RenderTexture->Initialize(m_D3D->GetDevice(), SHADOWMAP_WIDTH, SHADOWMAP_HEIGHT, SCREEN_DEPTH, SCREEN_NEAR);
+//	result = m_RenderTexture->Initialize(m_D3D->GetDevice(), screenWidth, screenHeight, SCREEN_DEPTH, SCREEN_NEAR);
 	if(!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the render to texture object.", L"Error", MB_OK);
