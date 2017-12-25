@@ -202,6 +202,12 @@ bool SystemClass::Frame()
 		return false;
 	}
 
+
+	// Mouse look
+	int mouseX, mouseY;
+	m_Input->GetMouseLocation(mouseX, mouseY);
+	m_Position->SetRotation(mouseX, mouseY, 0);
+
 	// Get the view point position/rotation.
 	m_Position->GetPosition(posX, posY, posZ);
 	m_Position->GetRotation(rotX, rotY, rotZ);

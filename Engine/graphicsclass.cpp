@@ -404,8 +404,10 @@ bool GraphicsClass::Render()
 	m_CubeModel->Render(m_D3D->GetDeviceContext());
 
 	// Render the model using the shadow shader.
-	result = m_ShadowShader->Render(m_D3D->GetDeviceContext(), m_CubeModel->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix, lightViewMatrix, 
-									lightProjectionMatrix, m_CubeModel->GetTexture(), m_RenderTexture->GetShaderResourceView(), m_Light->GetPosition(),
+	result = m_ShadowShader->Render(
+		m_D3D->GetDeviceContext(), m_CubeModel->GetIndexCount(), 
+		worldMatrix, viewMatrix, projectionMatrix, lightViewMatrix, 
+		lightProjectionMatrix, m_CubeModel->GetTexture(), m_RenderTexture->GetShaderResourceView(), m_Light->GetPosition(),
 									m_Light->GetAmbientColor(), m_Light->GetDiffuseColor());
 	if(!result)
 	{
@@ -442,9 +444,13 @@ bool GraphicsClass::Render()
 
 	// Render the ground model using the shadow shader.
 	m_GroundModel->Render(m_D3D->GetDeviceContext());
-	result = m_ShadowShader->Render(m_D3D->GetDeviceContext(), m_GroundModel->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix, lightViewMatrix,
-									lightProjectionMatrix, m_GroundModel->GetTexture(), m_RenderTexture->GetShaderResourceView(), m_Light->GetPosition(), 
-									m_Light->GetAmbientColor(), m_Light->GetDiffuseColor());
+	result = m_ShadowShader->Render(
+		m_D3D->GetDeviceContext(), 
+		m_GroundModel->GetIndexCount(), 
+		worldMatrix, viewMatrix, projectionMatrix, 
+		lightViewMatrix,lightProjectionMatrix, 
+		m_GroundModel->GetTexture(), m_RenderTexture->GetShaderResourceView(), m_Light->GetPosition(), 
+		m_Light->GetAmbientColor(), m_Light->GetDiffuseColor());
 	if(!result)
 	{
 		return false;

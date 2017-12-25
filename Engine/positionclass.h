@@ -9,7 +9,8 @@
 // INCLUDES //
 //////////////
 #include <math.h>
-
+#include <DirectXMath.h>
+using namespace DirectX;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: PositionClass
@@ -48,6 +49,11 @@ private:
 	float m_upwardSpeed, m_downwardSpeed;
 	float m_leftTurnSpeed, m_rightTurnSpeed;
 	float m_lookUpSpeed, m_lookDownSpeed;
+
+
+
+	float _fwdSpeed = 0;
+
 };
 
 #endif
